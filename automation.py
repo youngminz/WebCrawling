@@ -11,5 +11,9 @@ class Automation:
         WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
         self.driver.find_element_by_xpath(xpath).click()
 
+    def find_xpath(self, xpath):
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
+        return self.driver.find_element_by_xpath(xpath)
+
     def __del__(self):
         self.driver.close()
