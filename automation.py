@@ -13,10 +13,11 @@ class Automation:
 
     def send_keys_xpath(self, xpath, keys):
         WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
-        self.driver.find_element_by_xpath(xpath).clear()
-        self.driver.find_element_by_xpath(xpath).click()
-        self.driver.find_element_by_xpath(xpath).send_keys(Keys.TAB)
-        self.driver.find_element_by_xpath(xpath).send_keys(keys)
+        x = self.driver.find_element_by_xpath(xpath)
+        x.clear()
+        x.click()
+        x.send_keys(Keys.TAB)
+        x.send_keys(keys)
 
     def click_xpath(self, xpath):
         WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
