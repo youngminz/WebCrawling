@@ -62,6 +62,6 @@ class Automation:
 
 
 def main():
-    pass
+    a = Automation()
 
 main()
