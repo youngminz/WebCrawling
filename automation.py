@@ -59,3 +59,9 @@ class Automation:
                     yield l.strip().split(sep)
                 else:
                     yield l.strip()
+
+
+def main():
+    pass
+
+main()
