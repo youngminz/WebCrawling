@@ -1,6 +1,7 @@
 import os
 import shutil
 import sys
+import time
 import zipfile
 
 import requests
@@ -72,6 +73,10 @@ class Automation:
                     yield l.strip().split(sep)
                 else:
                     yield l.strip()
+
+    @staticmethod
+    def format_time(format_string):  # "%Y-%m-%d %H:%M:%S"
+        return time.strftime(format_string)
 
 
 def main():
