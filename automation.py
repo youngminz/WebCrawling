@@ -37,14 +37,6 @@ class Automation:
     def __del__(self):
         self.driver.quit()
 
-    def send_keys_xpath(self, xpath, keys):
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
-        x = self.driver.find_element_by_xpath(xpath)
-        x.clear()
-        x.click()
-        x.send_keys(Keys.TAB)
-        x.send_keys(keys)
-
     def click_css_selector(self, css_selector, wait=10):
         if wait != 0:
             WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
@@ -55,6 +47,14 @@ class Automation:
             WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
         return self.driver.find_element_by_css_selector(css_selector)
 
+    def send_keys_css_selector(self, css_selector, keys):
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
+        x = self.driver.find_element_by_css_selector(css_selector)
+        x.clear()
+        x.click()
+        x.send_keys(Keys.TAB)
+        x.send_keys(keys)
+
     def click_xpath(self, xpath, wait=10):
         if wait != 0:
             WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
@@ -64,6 +64,14 @@ class Automation:
         if wait != 0:
             WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
         return self.driver.find_element_by_xpath(xpath)
+
+    def send_keys_xpath(self, xpath, keys):
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
+        x = self.driver.find_element_by_xpath(xpath)
+        x.clear()
+        x.click()
+        x.send_keys(Keys.TAB)
+        x.send_keys(keys)
 
     @staticmethod
     def read_txt(filename, sep=None):
