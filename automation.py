@@ -6,6 +6,7 @@ import zipfile
 
 import requests
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
@@ -72,6 +73,17 @@ class Automation:
         x.click()
         x.send_keys(Keys.TAB)
         x.send_keys(keys)
+
+    def is_alert(self):
+        try:
+            WebDriverWait(self.driver, 1).until(expected_conditions.alert_is_present(), "")
+            alert = self.driver.switch_to.alert
+            text = alert.text
+            alert.accept()
+            return True, text
+
+        except TimeoutException:
+            return False, ""
 
     @staticmethod
     def read_txt(filename, sep=None):
