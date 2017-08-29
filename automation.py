@@ -14,7 +14,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class Automation:
-    def __init__(self):
+    def __init__(self, chrome_options=None):
         if not os.path.isfile("chromedriver.exe"):
             print("chromedriver.exe가 존재하지 않습니다. 최신 릴리즈를 최초 1회 다운로드합니다.", file=sys.stderr)
 
@@ -32,8 +32,12 @@ class Automation:
                 zip.extract("chromedriver.exe")
 
             os.remove("chromedriver_win32.zip")
-
-        self.driver = webdriver.Chrome()
+            
+        # option = webdriver.ChromeOptions()
+        # option.add_argument("--user-data-dir=Foo/Bar")
+        # a = Automation(option)
+        
+        self.driver = webdriver.Chrome(chrome_options=chrome_options)
 
     def __del__(self):
         self.driver.quit()
@@ -73,6 +77,7 @@ class Automation:
         x.click()
         x.send_keys(Keys.TAB)
         x.send_keys(keys)
+        time.sleep(0.2)
 
     def is_alert(self):
         try:
