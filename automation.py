@@ -32,11 +32,11 @@ class Automation:
                 zip.extract("chromedriver.exe")
 
             os.remove("chromedriver_win32.zip")
-            
+
         # option = webdriver.ChromeOptions()
         # option.add_argument("--user-data-dir=Foo/Bar")
         # a = Automation(option)
-        
+
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
 
     def __del__(self):
@@ -44,16 +44,19 @@ class Automation:
 
     def click_css_selector(self, css_selector, wait=10):
         if wait != 0:
-            WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
+            WebDriverWait(self.driver, wait).until(
+                expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
         self.driver.find_element_by_css_selector(css_selector).click()
 
     def find_css_selector(self, css_selector, wait=10):
         if wait != 0:
-            WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
+            WebDriverWait(self.driver, wait).until(
+                expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
         return self.driver.find_element_by_css_selector(css_selector)
 
-    def send_keys_css_selector(self, css_selector, keys):
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
+    def send_keys_css_selector(self, css_selector, keys, wait=10):
+        WebDriverWait(self.driver, wait).until(
+            expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, css_selector)))
         x = self.driver.find_element_by_css_selector(css_selector)
         x.clear()
         x.click()
@@ -70,8 +73,8 @@ class Automation:
             WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
         return self.driver.find_element_by_xpath(xpath)
 
-    def send_keys_xpath(self, xpath, keys):
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
+    def send_keys_xpath(self, xpath, keys, wait=10):
+        WebDriverWait(self.driver, wait).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath)))
         x = self.driver.find_element_by_xpath(xpath)
         x.clear()
         x.click()
@@ -100,7 +103,7 @@ class Automation:
                     yield l.strip()
 
     @staticmethod
-    def format_time(format_string):  # "%Y-%m-%d %H:%M:%S"
+    def format_time(format_string="%Y-%m-%d %H:%M:%S"):
         return time.strftime(format_string)
 
 
