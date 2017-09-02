@@ -80,7 +80,7 @@ class Automation:
         x.click()
         x.send_keys(Keys.TAB)
         x.send_keys(keys)
-        time.sleep(0.2)
+        time.sleep(0.1)
 
     def is_alert(self):
         try:
