@@ -94,13 +94,19 @@ class Automation:
             return False, ""
 
     @staticmethod
-    def read_txt(filename, sep=None):
+    def read_txt(filename, columns=1, sep=None):
         with open(filename, "r") as f:
             for l in f:
                 if sep is not None:
-                    yield l.strip().split(sep)
+                    if l.strip() == "":
+                        yield [None] * columns
+                    else:
+                        yield l.strip().split(sep)
                 else:
-                    yield l.strip()
+                    if l.strip() == "":
+                        yield None
+                    else:
+                        yield l.strip()
 
     @staticmethod
     def format_time(format_string="%Y-%m-%d %H:%M:%S"):
