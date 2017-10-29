@@ -3,6 +3,7 @@ import shutil
 import sys
 import time
 import zipfile
+from configparser import ConfigParser
 
 import requests
 from selenium import webdriver
@@ -114,6 +115,10 @@ class Automation:
 
 
 def main():
+    config = ConfigParser()
+    config.read("settings.ini")
+
     a = Automation()
+
 
 main()
